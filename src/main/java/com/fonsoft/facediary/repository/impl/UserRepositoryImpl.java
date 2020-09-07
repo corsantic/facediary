@@ -4,44 +4,41 @@ package com.fonsoft.facediary.repository.impl;
 import com.fonsoft.facediary.model.User;
 import com.fonsoft.facediary.model.UserParameter;
 import com.fonsoft.facediary.repository.UserRepository;
-import com.fonsoft.facediary.util.BeanConfig;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 @Repository
+//@Transactional
 public class UserRepositoryImpl implements UserRepository {
 
 
-/*
-    SessionFactory sessionFactory = new AnnotationConfiguration();
+    /*
+        SessionFactory sessionFactory = new AnnotationConfiguration();
 
-    Session session = sessionFactory.getCurrentSession();
-    Criteria criteria = session.createCriteria(User.class);
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(User.class);
 
 
-    public default User findUserByName(String userName){
+        public default User findUserByName(String userName){
 
-        User specifiedUser = (User) criteria.add(Restrictions.eq("userName", userName))
-                .uniqueResult();
+            User specifiedUser = (User) criteria.add(Restrictions.eq("userName", userName))
+                    .uniqueResult();
 
-        return specifiedUser;
-*/
+            return specifiedUser;
+    */
+    private final SessionFactory sessionFactory;
     @Autowired
-    private SessionFactory sessionFactory;
-
     public UserRepositoryImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-
 
     @Override
     public User authenticate(UserParameter userParameter) {

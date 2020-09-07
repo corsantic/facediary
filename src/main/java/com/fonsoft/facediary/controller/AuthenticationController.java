@@ -2,24 +2,22 @@ package com.fonsoft.facediary.controller;
 
 import com.fonsoft.facediary.model.User;
 import com.fonsoft.facediary.model.UserParameter;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import com.fonsoft.facediary.service.UserService;
 
 @RestController
 public class AuthenticationController {
 
-    private UserService userService;
-
+    private final UserService userService;
+    @Autowired
     public AuthenticationController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping("/authenticateUser")
-    public User authenticateUser(@RequestBody UserParameter userParameter){
+    @PostMapping("/authentication")
+    public User authenticateUser(@RequestBody  UserParameter userParameter){
 
-        User result = userService.authenticate(userParameter);
-        return result;
+        return userService.authenticate(userParameter);
     }
 }
